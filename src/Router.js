@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from './Home'
-import ProductDetails from './details/ProductDetails'
+import ProductDetails from './details/index'
 import Products from './products/Products'
 import ErrorPage from './ErrorPage'
 const AppRouter = () => {

@@ -2,7 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './style.scss'
 
-const Item = ({ id, name, price, img, desc }) => {
+const Item = ({ id, name, price, img, desc, rating }) => {
+  const Rating = []
+
+  for (let i = 1; i <= 5; i++) {
+    if (i <= rating) Rating.push(<i className='fas fa-star'></i>)
+    else Rating.push(<i key={i} className='far fa-star'></i>)
+  }
+
   return (
     <div className='ecommerce-card shadow-sm' key={id}>
       <div className='card-content'>
@@ -13,13 +20,7 @@ const Item = ({ id, name, price, img, desc }) => {
         </div>
         <div className='row'>
           <div className='rating col-8'>
-            <span style={{ color: '#FF9F1C' }}>
-              <i className='fas fa-star'></i>
-              <i className='fas fa-star'></i>
-              <i className='fas fa-star'></i>
-              <i className='fas fa-star'></i>
-              <i className='far fa-star'></i>
-            </span>
+            <span style={{ color: '#FF9F1C' }}>{Rating}</span>
           </div>
           <div className='product-price col-4'>
             <h6 className='item-price'>{price}</h6>

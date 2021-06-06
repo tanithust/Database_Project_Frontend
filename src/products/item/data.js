@@ -10,6 +10,7 @@ const data = [
     for buffer-free streaming.`,
     price: '$39.99',
     img: img0,
+    rating: 3,
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const data = [
     desc: `Google Chromecast: Enjoy a world of entertainment with Google Chromecast. Just connect to your HDTV's HDMI
     interface and your home Wi-Fi network to get started. You can stream your favorite apps from your compatible
     phone, tablet or laptop, plus use your phone as a remote to search, play and pause content.`,
+    rating: 4,
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ const data = [
     img: img0,
     name: `Dell - Inspiron 15.6" Touch-Screen Laptop - Black`,
     by: 'Dell',
+    rating: 2,
   },
   {
     id: 4,
@@ -43,6 +46,7 @@ const data = [
     Amazon Echo Dot voice-controlled device turns any home into a smart home with the Alexa app on a smartphone
     or tablet.`,
     price: '$49.99',
+    rating: 4,
   },
   {
     id: 5,
@@ -54,6 +58,7 @@ const data = [
     price: '$999.99',
     img: img0,
     name: `Apple - MacBook Air® (Latest Model) - 13.3" Display - Silver`,
+    rating: 4,
   },
   {
     id: 6,
@@ -64,6 +69,7 @@ const data = [
     price: '$429.99',
     img: img0,
     name: `Sharp - 50" Class (49.5" Diag.) - LED - 1080p - Black`,
+    rating: 4,
   },
   {
     id: 7,
@@ -75,6 +81,7 @@ const data = [
     compatible with Android and iOS operating systems, and can control compatible smart devices such as
     Chromecast or Nest.`,
     price: '$129',
+    rating: 4,
   },
   {
     id: 8,
@@ -85,6 +92,7 @@ const data = [
     by Apple Inc. They are designed to fit the ear while retaining a new design pushed by Apple alongside the
     iPod and iPod Touch products, with which they were sold together.`,
     price: '$29.99',
+    rating: 4,
   },
   {
     id: 9,
@@ -95,6 +103,7 @@ const data = [
     illumination while using minimal energy.Get lighting that's as smart as you are.`,
     price: '$14.99',
     img: img0,
+    rating: 4,
   },
 ]
 export default data
