@@ -1,4 +1,4 @@
-import img0 from '../../assets/eCommerce/9.png'
+import img0 from '../../../assets/eCommerce/9.png'
 const data = [
   {
     id: 1,
