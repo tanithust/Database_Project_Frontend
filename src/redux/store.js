@@ -22,3 +22,8 @@ const store = configureStore({
 export const persistor = persistStore(store)
 
 export default store
+// export default configureStore({
+//   reducer: {
+//     store: storeReducer,
+//   },
+// })

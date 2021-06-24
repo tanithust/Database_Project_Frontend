@@ -1,27 +1,25 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Item from './item/index'
-import data from '../../products/item/data'
 import './style.css'
 
 const Cart = () => {
   const cart = useSelector((state) => state.store.cart)
-  // const increaseQty = (id) => {
-  //   const cart = cart.map((item) => {
-  //     if (item.ProductID == id) return { ...item, quantity: item.quantity + 1 }
-  //     else return item
-  //   })
-  //   console.log(cart)
-  // }
-  // const decreaseQty = (id) => {
-  //   const cart = cart.map((item) => {
-  //     if (item.ProductID == id) return { ...item, quantity: item.quantity - 1 }
-  //     else return item
-  //   })
-  // }
-  const items = data.map((item) => {
+  const totalBill = useSelector((state) => state.store.totalBill)
+  const [isEmpty, setIsEmpty] = useState(true)
+
+  const checkCart = () => {
+    if (cart.length === 0) setIsEmpty(true)
+    else setIsEmpty(false)
+  }
+  const items = cart.map((item) => {
     return <Item {...item} />
   })
+  useEffect(() => {
+    checkCart()
+  })
+  console.log(totalBill)
   return (
     <div className='cart-container'>
       <div className='process'>
@@ -33,9 +31,13 @@ const Cart = () => {
       </div>
       <div className='cart-content'>
         <div className='cart-product'>
-          <ul>
-            <li>{items}</li>
-          </ul>
+          {isEmpty ? (
+            <h3>Your cart is empty </h3>
+          ) : (
+            <ul>
+              <li>{items}</li>
+            </ul>
+          )}
         </div>
         <div className='options'>
           <h4 className='title'>Options</h4>
@@ -48,15 +50,11 @@ const Cart = () => {
           <h4>Price Details</h4>
           <div className='opt-detail'>
             <p>Total MRP</p>
-            <p>$598</p>
-          </div>
-          <div className='opt-detail'>
-            <p>Bag Discount</p>
-            <p className='secondary'>-25$</p>
+            <p>{totalBill} VND</p>
           </div>
           <div className='opt-detail'>
             <p>Estimated Tax</p>
-            <p>$1.3</p>
+            <p>{(totalBill / 1000) * 5} VND</p>
           </div>
           <div className='opt-detail bottom-line'>
             <p>Delivery Charges</p>
@@ -64,9 +62,11 @@ const Cart = () => {
           </div>
           <div className='opt-detail'>
             <h4>Total</h4>
-            <h4>$574</h4>
+            <h4>{totalBill + (totalBill / 1000) * 5} VND</h4>
           </div>
-          <button className='btn btn-wishlist'>Place Order</button>
+          <Link to='/checkout/address'>
+            <button className='btn btn-wishlist'>Place Order</button>
+          </Link>
         </div>
       </div>
     </div>

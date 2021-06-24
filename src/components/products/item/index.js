@@ -2,7 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './style.scss'
 
-const Item = ({ id, name, price, img, desc, rating }) => {
+const Item = ({
+  product_id,
+  product_name,
+  price,
+  image,
+  description,
+  rating,
+}) => {
   const Rating = []
 
   for (let i = 1; i <= 5; i++) {
@@ -11,11 +18,11 @@ const Item = ({ id, name, price, img, desc, rating }) => {
   }
 
   return (
-    <div className='ecommerce-card shadow-sm' key={id}>
+    <div className='ecommerce-card shadow-sm' key={product_id}>
       <div className='card-content'>
         <div className='item-img text-center'>
-          <Link to={`/products/${id}`}>
-            <img src={img} alt={name} className='img-fluid' />
+          <Link to={`/products/${product_id}`}>
+            <img src={image} alt={product_name} className='img-fluid' />
           </Link>
         </div>
         <div className='row'>
@@ -27,10 +34,10 @@ const Item = ({ id, name, price, img, desc, rating }) => {
           </div>
         </div>
         <div className='item-name'>
-          <Link to={`/products/${id}`}>{name} </Link>
+          <Link to={`/products/${product_id}`}>{product_name} </Link>
         </div>
         <div className='item-desc'>
-          <p className='item-description'>{desc}</p>
+          <p className='item-description'>{description}</p>
         </div>
       </div>
     </div>

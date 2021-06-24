@@ -5,16 +5,21 @@ import {
   decreaseQty,
   removeFromCart,
 } from '../../../../redux/storeSlice'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-const Item = ({ name, img, rating, by, price, id }) => {
-  const [qty, setQty] = useState(1)
-  const cart = useSelector((state) => state.store.cart)
+const Item = ({
+  product_id,
+  product_name,
+  price,
+  image,
+  rating,
+  supplier_name,
+  quantity,
+}) => {
+  const [qty, setQty] = useState(quantity)
   const dp = useDispatch()
   const increase = () => {
     setQty((prevState) => {
-      console.log(id)
-      dp(increaseQty(id))
       return prevState + 1
     })
   }
@@ -22,8 +27,6 @@ const Item = ({ name, img, rating, by, price, id }) => {
     setQty((prevState) => {
       if (prevState === 1) return prevState
       else {
-        console.log(id)
-        dp(decreaseQty(id))
         return prevState - 1
       }
     })
@@ -35,21 +38,22 @@ const Item = ({ name, img, rating, by, price, id }) => {
     if (i <= rating) Rating.push(<i className='fas fa-star'></i>)
     else Rating.push(<i key={i} className='far fa-star'></i>)
   }
+  console.log(Rating[4])
   return (
     <div className='cart-item'>
       <div className='cart-item-img'>
-        <img src={img} alt={name} />
+        <img src={image} alt={product_name} />
       </div>
       <div className='cart-item-detail'>
         <h4>
-          <Link to={`/products/${id}`}>
-            <a href='#'>{name}</a>
+          <Link to={`/products/${product_id}`}>
+            <a href='#'>{product_name}</a>
           </Link>
         </h4>
         <h5>
           By{' '}
           <span>
-            <a href='#'>{by}</a>
+            <a href='#'>{supplier_name}</a>
           </span>
         </h5>
         <div className='cart-item-rating'>
@@ -59,11 +63,25 @@ const Item = ({ name, img, rating, by, price, id }) => {
         <div className='qty'>
           <p>Qty</p>
           <div className='qty-btn'>
-            <button className='qty-dec' onClick={decrease}>
+            <button
+              className='qty-dec'
+              onClick={() => {
+                if (qty > 1) {
+                  dp(decreaseQty(product_id))
+                }
+                decrease()
+              }}
+            >
               -
             </button>
             <span id='qty'>{qty}</span>
-            <button className='qty-inc' onClick={increase}>
+            <button
+              className='qty-inc'
+              onClick={() => {
+                dp(increaseQty(product_id))
+                increase()
+              }}
+            >
               +
             </button>
           </div>
@@ -76,10 +94,7 @@ const Item = ({ name, img, rating, by, price, id }) => {
         <button
           id='remove'
           className='btn btn-remove'
-          onClick={() => {
-            console.log(id)
-            dp(removeFromCart(id))
-          }}
+          onClick={() => dp(removeFromCart(product_id))}
         >
           Remove
         </button>

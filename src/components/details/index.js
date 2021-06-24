@@ -1,19 +1,18 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import data from '../products/item/data'
 import './style.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { addToCart } from '../../redux/storeSlice'
+import Header from '../header'
 
 const ProductDetails = () => {
   const { id } = useParams()
-  const product = useSelector((state) => state.store.products[id - 1])
+  const product = useSelector((state) =>
+    state.store.products.find((item) => item.product_id === Number(id))
+  )
   const dispatch = useDispatch()
   const [qty, setQty] = useState(1)
-  // const getData = async () => {
-  //   const { data } = await axios.get(`http://localhost:5000/products/${id}`)
-  //   setProduct(data[0])
-  // }
+
   const order = {
     ...product,
     quantity: qty,
@@ -26,35 +25,35 @@ const ProductDetails = () => {
   }
   const decrease = () => {
     setQty((prevState) => {
-      if (prevState == 1) return prevState
+      if (prevState === 1) return prevState
       else return prevState - 1
     })
   }
-
   return (
     <>
-      <div className='container'>
+      <Header />
+      <div className='container my-5'>
         <div className='row'>
           <div className='col-sm-4 div1'>
             <img
-              src={data[id - 1].img}
-              alt={data[id - 1].name}
+              src={product.image}
+              alt={product.product_name}
               className='img-fluid'
               width='500'
               height='600'
             />
           </div>
           <div className='col-sm div2'>
-            <h1>{data[id - 1].name}</h1>
+            <h1>{product.product_name}</h1>
             <p className='card-text item-company mb-0'>
               <span>by </span>
-              <a>{data[id - 1].by}</a>
+              <a>{product.supplier_name}</a>
             </p>
-            <h4 className='item-price mr-1'>{data[id - 1].price}</h4>
+            <h4 className='item-price mr-1'>{product.price} VND</h4>
             <p>
               Available - <span className='text-success'>In stock</span>
             </p>
-            <p>{data[id - 1].desc}</p>
+            <p>{product.description}</p>
             <ul>
               <li>Free shipping</li>
               <li>EMI Options Available</li>
@@ -79,14 +78,20 @@ const ProductDetails = () => {
                 </button>
               </div>
             </div>
-            <div className='buttons'>
+            <div className='buttons row '>
               <button
-                className='btn btn-primary col-sm-3'
+                className='btn-add col-5 text-white'
                 onClick={() => dispatch(addToCart(order))}
               >
-                Add to cart
+                <i className='fas fa-cart-plus mx-1'></i> Add to cart
               </button>
-              <button className='btn btn-primary col-sm-3'>Wishlist</button>
+              <button className='btn-add col-5'>
+                <i
+                  className='fas fa-heart mx-1'
+                  style={{ color: '#ea5455' }}
+                ></i>{' '}
+                Wishlist
+              </button>
             </div>
           </div>
         </div>

@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import data from './item/data'
+
 import Item from './item/index'
-import Filter from './products-filter/index'
+import Filter from './filter/index'
 import Pagination from './pagination/index'
+import Header from '../header'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchData } from '../../redux/storeSlice'
+
 import { Link } from 'react-router-dom'
 import './style.scss'
 
 const Products = () => {
   const products = useSelector((state) => state.store.products)
-  const cart = useSelector((state) => state.store.cart)
   const dispatch = useDispatch()
-
+  const [displayProducts, setDisplayProducts] = useState(products)
   const [currentPage, setCurrentPage] = useState(1)
-  const [itemsPerPage] = useState(8)
+  const [itemsPerPage] = useState(9)
 
   useEffect(() => {
     dispatch(fetchData())
@@ -23,30 +24,27 @@ const Products = () => {
   // Get current items
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem)
+  const currentItems = displayProducts.slice(indexOfFirstItem, indexOfLastItem)
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   const newProduct = currentItems.map((item) => {
     return (
-      <div key={item.id} className='col-4 item'>
+      <div key={item.product_id} className='col-4 item'>
         <Item {...item} />
       </div>
     )
   })
-  console.log(products)
   return (
     <>
-      <Link to='/checkout/cart'>
-        <button className='btn'>Cart</button>
-      </Link>
+      <Header setDisplay={setDisplayProducts} />
       <div className='row justify-content-center bg-light'>
         <div className='col-9 content px-2'>
           <div className='row justify-content-around'>
             <div className='col-2 sidebar'>
               <div className='filter-col'>
-                <Filter />
+                <Filter setDisplay={setDisplayProducts} />
               </div>
             </div>
             <div className='col-9 products'>
@@ -55,7 +53,7 @@ const Products = () => {
               </div>
               <Pagination
                 itemsPerPage={itemsPerPage}
-                totalItems={data.length}
+                totalItems={displayProducts.length}
                 paginate={paginate}
               />
             </div>

@@ -10,6 +10,10 @@
         .item-img{
             margin-top : 1rem; 
             height: 12rem;
+            img {
+                max-height: 12rem;
+                
+            }
         }
         .item-name{
             a:link{
