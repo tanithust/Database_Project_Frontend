@@ -4,6 +4,7 @@ import Item from './item/index'
 import Filter from './filter/index'
 import Pagination from './pagination/index'
 import Header from '../header'
+import Footer from '../footer'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchData } from '../../redux/storeSlice'
 
@@ -60,6 +61,7 @@ const Products = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   )
 }

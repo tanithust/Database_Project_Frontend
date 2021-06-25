@@ -22,7 +22,7 @@ const Header = ({ setDisplay }) => {
     <div className='row justify-content-center header-container text-white'>
       <div className='row col-9 p-2'>
         <div className='col-2 p-2 logo d-flex align-self-center justify-content-around'>
-          <Link to='/products'>BK MediaMart</Link>
+          <Link to='/products'>TechMart</Link>
         </div>
         <div className='col-8 p-2 row search'>
           <input

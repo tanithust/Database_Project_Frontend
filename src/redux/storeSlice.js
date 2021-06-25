@@ -60,4 +60,7 @@ export const fetchData = () => async (dispatch) => {
   const { data } = await axios.get('http://localhost:5000/products')
   dispatch(setProducts(data))
 }
+export const resetCart = (dispatch) => {
+  dispatch(setCart([]))
+}
 export default storeSlice.reducer

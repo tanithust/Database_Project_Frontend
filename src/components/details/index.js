@@ -4,7 +4,7 @@ import './style.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { addToCart } from '../../redux/storeSlice'
 import Header from '../header'
-
+import Footer from '../footer'
 const ProductDetails = () => {
   const { id } = useParams()
   const product = useSelector((state) =>
@@ -32,7 +32,7 @@ const ProductDetails = () => {
   return (
     <>
       <Header />
-      <div className='container my-5'>
+      <div className='container my-5 details'>
         <div className='row'>
           <div className='col-sm-4 div1'>
             <img
@@ -96,6 +96,7 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   )
 }
